@@ -7,12 +7,12 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  background-color: #ECEFF1;
+  background-color: #2c3e50;
 }
 
 .main-header {
   width: 100%;
-  background-color: #ffff81;
+  background-color: #2980b9;
 }
 
 .main-header .header-wrapper {
@@ -114,51 +114,13 @@ body {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 60px;
-  text-shadow: -0   -2px 1px #000000,
- 0   -2px 1px #000000,
- -0    2px 1px #000000,
- 0    2px 1px #000000,
- -2px -0   1px #000000,
- 2px -0   1px #000000,
- -2px  0   1px #000000,
- 2px  0   1px #000000,
- -1px -2px 1px #000000,
- 1px -2px 1px #000000,
- -1px  2px 1px #000000,
- 1px  2px 1px #000000,
- -2px -1px 1px #000000,
- 2px -1px 1px #000000,
- -2px  1px 1px #000000,
- 2px  1px 1px #000000,
- -2px -2px 1px #000000,
- 2px -2px 1px #000000,
- -2px  2px 1px #000000,
- 2px  2px 1px #000000,
- -2px -2px 1px #000000,
- 2px -2px 1px #000000,
- -2px  2px 1px #000000,
- 2px  2px 1px #000000;
+  text-shadow: -0   -2px 1px #000000, 0   -2px 1px #000000, -0    2px 1px #000000, 0    2px 1px #000000, -2px -0   1px #000000, 2px -0   1px #000000, -2px  0   1px #000000, 2px  0   1px #000000, -1px -2px 1px #000000, 1px -2px 1px #000000, -1px  2px 1px #000000, 1px  2px 1px #000000, -2px -1px 1px #000000, 2px -1px 1px #000000, -2px  1px 1px #000000, 2px  1px 1px #000000, -2px -2px 1px #000000, 2px -2px 1px #000000, -2px  2px 1px #000000, 2px  2px 1px #000000, -2px -2px 1px #000000, 2px -2px 1px #000000, -2px  2px 1px #000000, 2px  2px 1px #000000;
 }
 
 .site-banner .subheader {
   margin-bottom: auto;
   font-size: 40px;
-  text-shadow: -0   -1px 1px #000000,
- 0   -1px 1px #000000,
- -0    1px 1px #000000,
- 0    1px 1px #000000,
- -1px -0   1px #000000,
- 1px -0   1px #000000,
- -1px  0   1px #000000,
- 1px  0   1px #000000,
- -1px -1px 1px #000000,
- 1px -1px 1px #000000,
- -1px  1px 1px #000000,
- 1px  1px 1px #000000,
- -1px -1px 1px #000000,
- 1px -1px 1px #000000,
- -1px  1px 1px #000000,
- 1px  1px 1px #000000;
+  text-shadow: -0   -1px 1px #000000, 0   -1px 1px #000000, -0    1px 1px #000000, 0    1px 1px #000000, -1px -0   1px #000000, 1px -0   1px #000000, -1px  0   1px #000000, 1px  0   1px #000000, -1px -1px 1px #000000, 1px -1px 1px #000000, -1px  1px 1px #000000, 1px  1px 1px #000000, -1px -1px 1px #000000, 1px -1px 1px #000000, -1px  1px 1px #000000, 1px  1px 1px #000000;
 }
 
 .form-section {
@@ -170,7 +132,7 @@ body {
           justify-content: center;
   -ms-flex-line-pack: center;
       align-content: center;
-  background-color: #455A64;
+  background-color: #34495e;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
