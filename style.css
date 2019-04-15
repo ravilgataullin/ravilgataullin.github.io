@@ -1,0 +1,288 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background-color: #ECEFF1;
+}
+
+.main-header {
+  width: 100%;
+  background-color: #ffff81;
+}
+
+.main-header .header-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  height: 80px;
+}
+
+.main-header .logoimg {
+  display: block;
+  margin-left: 10px;
+  width: 60px;
+  height: 60px;
+}
+
+.main-header .logo {
+  font-weight: 900;
+  font-size: 40px;
+  margin-left: 10px;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.main-header .search-form {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.search-form .textfield {
+  border: none;
+  font-size: 20px;
+  line-height: 40px;
+  border-radius: 20px;
+  width: 200px;
+  display: block;
+  text-indent: 20px;
+}
+
+.search-form .textfield::-webkit-input-placeholder {
+  color: grey;
+}
+
+.search-form .textfield:-ms-input-placeholder {
+  color: grey;
+}
+
+.search-form .textfield::-ms-input-placeholder {
+  color: grey;
+}
+
+.search-form .textfield::placeholder {
+  color: grey;
+}
+
+.search-form .textfield:focus {
+  outline: none;
+}
+
+.main-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.site-banner {
+  background-color: #01579B;
+  background-image: url(https://picsum.photos/960/);
+  background-size: 100%;
+  background-position: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 500px;
+}
+
+.site-banner .header, .site-banner .subheader {
+  color: white;
+  text-align: center;
+}
+
+.site-banner .header {
+  margin-top: auto;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 60px;
+  text-shadow: -0   -2px 1px #000000,
+ 0   -2px 1px #000000,
+ -0    2px 1px #000000,
+ 0    2px 1px #000000,
+ -2px -0   1px #000000,
+ 2px -0   1px #000000,
+ -2px  0   1px #000000,
+ 2px  0   1px #000000,
+ -1px -2px 1px #000000,
+ 1px -2px 1px #000000,
+ -1px  2px 1px #000000,
+ 1px  2px 1px #000000,
+ -2px -1px 1px #000000,
+ 2px -1px 1px #000000,
+ -2px  1px 1px #000000,
+ 2px  1px 1px #000000,
+ -2px -2px 1px #000000,
+ 2px -2px 1px #000000,
+ -2px  2px 1px #000000,
+ 2px  2px 1px #000000,
+ -2px -2px 1px #000000,
+ 2px -2px 1px #000000,
+ -2px  2px 1px #000000,
+ 2px  2px 1px #000000;
+}
+
+.site-banner .subheader {
+  margin-bottom: auto;
+  font-size: 40px;
+  text-shadow: -0   -1px 1px #000000,
+ 0   -1px 1px #000000,
+ -0    1px 1px #000000,
+ 0    1px 1px #000000,
+ -1px -0   1px #000000,
+ 1px -0   1px #000000,
+ -1px  0   1px #000000,
+ 1px  0   1px #000000,
+ -1px -1px 1px #000000,
+ 1px -1px 1px #000000,
+ -1px  1px 1px #000000,
+ 1px  1px 1px #000000,
+ -1px -1px 1px #000000,
+ 1px -1px 1px #000000,
+ -1px  1px 1px #000000,
+ 1px  1px 1px #000000;
+}
+
+.form-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  background-color: #455A64;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.form-section .lorem-info {
+  width: 50%;
+  margin: 50px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.form-section .lorem-form {
+  width: 50%;
+  margin: 50px 0;
+}
+
+.lorem-info {
+  color: white;
+}
+
+.lorem-info .header {
+  margin: 0 auto;
+  font-size: 35px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.lorem-info .subheader {
+  margin: 0 auto;
+  font-size: 23px;
+  text-align: center;
+}
+
+.lorem-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 0 20px;
+}
+
+.lorem-form * {
+  display: block;
+  font-size: 20px;
+  line-height: 40px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.lorem-form *:first-child {
+  margin-top: 0;
+}
+
+.lorem-form .gap {
+  background-color: #00B0FF;
+  text-indent: 15px;
+}
+
+.lorem-form .gap:focus {
+  outline: 0;
+  background-color: #ECEFF1;
+  color: black;
+}
+
+.lorem-form .gap:focus::-webkit-input-placeholder {
+  color: black;
+}
+
+.lorem-form .gap:focus:-ms-input-placeholder {
+  color: black;
+}
+
+.lorem-form .gap:focus::-ms-input-placeholder {
+  color: black;
+}
+
+.lorem-form .gap:focus::placeholder {
+  color: black;
+}
+
+.lorem-form .gap::-webkit-input-placeholder {
+  color: white;
+}
+
+.lorem-form .gap:-ms-input-placeholder {
+  color: white;
+}
+
+.lorem-form .gap::-ms-input-placeholder {
+  color: white;
+}
+
+.lorem-form .gap::placeholder {
+  color: white;
+}
+
+.lorem-form .button {
+  background-color: #01579B;
+  color: white;
+  padding: 0 10px;
+  display: block;
+}
+/*# sourceMappingURL=style.css.map */

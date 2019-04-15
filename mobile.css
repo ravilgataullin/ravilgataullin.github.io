@@ -1,0 +1,36 @@
+@media (max-width: 640px) {
+  .main-header .header-wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    height: auto;
+    padding: 40px 0;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .main-header .header-wrapper .logoimg {
+    width: 200px;
+    height: 200px;
+  }
+  .main-header .header-wrapper .logo {
+    margin: 40px 0;
+  }
+  .main-header .search-form {
+    margin: 0 auto;
+  }
+  .site-banner .header {
+    font-size: 40px;
+  }
+  .site-banner .subheader {
+    font-size: 30px;
+  }
+  .form-section .lorem-info {
+    width: 100%;
+  }
+  .form-section .lorem-form {
+    width: 100%;
+  }
+}
+/*# sourceMappingURL=mobile.css.map */

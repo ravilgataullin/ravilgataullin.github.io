@@ -1,0 +1,61 @@
+@media(max-width: 640px){
+    .main-header{
+        .header-wrapper{
+            flex-direction: column;
+            
+
+            height: auto;
+            
+            padding: 40px 0;
+            justify-content: center;
+            
+            .logoimg{
+                width:200px;
+                height: 200px;
+            }
+
+            .logo{
+                margin: 40px 0;
+            }
+
+        }
+
+        .search-form{
+            margin: 0 auto;
+        }
+    }
+
+
+
+    .site-banner{
+        .header{
+            font-size:40px;
+        }
+        .subheader{
+            font-size:30px;
+        }
+    }
+
+    .form-section{
+        .lorem-info{
+            width: 100%;
+        }
+
+        .lorem-form{
+            width: 100%;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    
+}

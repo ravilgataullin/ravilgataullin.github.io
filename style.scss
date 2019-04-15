@@ -1,0 +1,264 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+body{
+    font-family: "Open Sans", sans-serif;
+    background-color: #ECEFF1;
+}
+
+.main-header{
+    width: 100%;
+    background-color: #ffff81;
+    
+    .header-wrapper{
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        
+        max-width: 960px;
+        width: 100%;
+        margin: 0 auto;
+        height: 80px
+    }
+
+
+    .logoimg{
+        display: block;
+        margin-left: 10px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .logo{
+        font-weight: 900;
+        font-size: 40px;
+        margin-left: 10px;
+        text-transform: uppercase;
+        color: #000;
+    }
+
+    .search-form{
+        margin-left: auto;
+        margin-right: 10px;
+    }
+}
+
+
+.search-form{
+    
+    .textfield{
+        border: none;
+        font-size: 20px;
+        line-height: 40px;
+        border-radius: 20px;
+        width:200px;
+        
+        display: block;
+
+        text-indent: 20px;
+
+        &::placeholder{
+            color: grey;
+        }
+
+        &:focus{
+            outline: none;
+
+
+        }
+    }
+}
+
+
+
+
+
+.main-wrapper{
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.site-banner{
+    background-color: #01579B;
+    background-image: url(https://picsum.photos/960/);
+    background-size: 100%;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    height: 500px;
+
+    .header, .subheader{
+        color: white;
+       
+        
+        text-align: center;
+    }
+
+    .header{
+        margin-top: auto;
+        
+        text-transform: uppercase;
+
+        font-weight: bold;
+        font-size: 60px;
+        text-shadow: 
+        -0   -2px 1px #000000,
+		 0   -2px 1px #000000,
+		-0    2px 1px #000000,
+		 0    2px 1px #000000,
+		-2px -0   1px #000000,
+		 2px -0   1px #000000,
+		-2px  0   1px #000000,
+		 2px  0   1px #000000,
+		-1px -2px 1px #000000,
+		 1px -2px 1px #000000,
+		-1px  2px 1px #000000,
+		 1px  2px 1px #000000,
+		-2px -1px 1px #000000,
+		 2px -1px 1px #000000,
+		-2px  1px 1px #000000,
+		 2px  1px 1px #000000,
+		-2px -2px 1px #000000,
+		 2px -2px 1px #000000,
+		-2px  2px 1px #000000,
+		 2px  2px 1px #000000,
+		-2px -2px 1px #000000,
+		 2px -2px 1px #000000,
+		-2px  2px 1px #000000,
+		 2px  2px 1px #000000;
+
+    }
+
+    .subheader{
+        margin-bottom: auto;
+        font-size: 40px;
+        text-shadow: 
+        -0   -1px 1px #000000,
+		 0   -1px 1px #000000,
+		-0    1px 1px #000000,
+		 0    1px 1px #000000,
+		-1px -0   1px #000000,
+		 1px -0   1px #000000,
+		-1px  0   1px #000000,
+		 1px  0   1px #000000,
+		-1px -1px 1px #000000,
+		 1px -1px 1px #000000,
+		-1px  1px 1px #000000,
+		 1px  1px 1px #000000,
+		-1px -1px 1px #000000,
+		 1px -1px 1px #000000,
+		-1px  1px 1px #000000,
+		 1px  1px 1px #000000;
+    }
+
+
+}
+
+
+
+.form-section{
+    display: flex;
+    
+    
+    justify-content: center;
+    align-content: center;
+    background-color: #455A64;
+    flex-wrap: wrap;
+
+    .lorem-info{
+        width: 50%;
+        margin: 50px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+
+    .lorem-form{
+        width: 50%;
+        margin: 50px 0;
+    }
+}
+
+.lorem-info{
+    color: white;
+    .header{
+
+        margin: 0 auto;
+        font-size: 35px;
+        text-align: center;
+        font-weight: bold;
+        
+    }
+    .subheader{
+        margin: 0 auto;
+        font-size: 23px;
+        text-align: center;
+    }
+    
+}
+
+.lorem-form{
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+   
+    *{
+        display: block;
+        font-size: 20px;
+        line-height:40px;
+        border:none;
+        border-radius: 5px;
+
+        
+
+        margin-top: 10px;
+        
+        &:first-child{
+            margin-top: 0;
+        }
+    }
+
+
+    .gap{
+       
+        background-color: #00B0FF;
+        text-indent:15px;
+        
+        &:focus{
+            outline: 0;
+            background-color: #ECEFF1;
+            color: black;
+            &::placeholder{
+                color:black;
+            }
+        }
+
+        &::placeholder{
+            
+            color:white;
+
+            
+        }
+
+    }
+
+    .button{
+        background-color:#01579B;
+        color: white;
+        padding: 0 10px;
+      
+        display: block;
+    }
+
+    
+
+}
