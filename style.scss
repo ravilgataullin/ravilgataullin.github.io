@@ -93,6 +93,7 @@ body{
     flex-direction: column;
     justify-content: center;
     
+    
     height: 500px;
 
     .header, .subheader{
@@ -105,8 +106,8 @@ body{
     .header{
         margin-top: auto;
         
+       
         text-transform: uppercase;
-
         font-weight: bold;
         font-size: 60px;
         text-shadow: 
@@ -139,6 +140,7 @@ body{
 
     .subheader{
         margin-bottom: auto;
+        font-family: 'Pattaya', sans-serif;
         font-size: 40px;
         text-shadow: 
         -0   -1px 1px #000000,
