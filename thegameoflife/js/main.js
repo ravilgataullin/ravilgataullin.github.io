@@ -198,7 +198,9 @@ function Cells(elem, n){
         //alert(this.stateArray[0][0].state);
     }
 
-    document.addEventListener('keydown', ()=>{
+    
+
+    this.handler = ()=>{
         if(!this.isWorking){
             this.isWorking = true ;
             this.interval = setInterval( ()=>{
@@ -211,7 +213,10 @@ function Cells(elem, n){
             clearInterval(this.interval);
             this.isWorking = false ;
         }
-    })
+    };
+    document.addEventListener('keydown', handler);
+    document.addEventListener('Swiperight', handler);
+
 
 }
 
