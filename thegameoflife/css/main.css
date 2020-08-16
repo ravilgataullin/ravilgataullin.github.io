@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+}
+
+body{
+    margin: 15px 0 0
+}
+
+.canvas_block{
+    width: 800px;
+    height: 800px;
+    margin: 0 auto;
+    display: block;
+    
+}
