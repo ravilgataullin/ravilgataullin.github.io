@@ -1,369 +1,229 @@
-var stateArray = []; 
-var canvasWidth = 30, canvasHeight = 30;
+'use strict';
 
-var gameCanv = document.getElementById("gamecanvas");
-var gameCtx = gameCanv.getContext("2d");
+// let canv = document.getElementsByClassName('canvas_block')[0]
+// let context = canv.getContext('2d');
+// const WIDTH = 800;
+// const HEIGHT = 800;
+// //context.fillRect(50, 25,150,100);
 
-var interval;
+// function drawCell(x, y){
+//     context.fillStyle ='black';
+//     context.fillRect(x*10, y*10, 10, 10);
+// }
 
-var bgCell = new Image(),
-    yesCell = new Image(),
-    noCell = new Image()
 
 
-    bgCell.src = "img/cell.png";
-    yesCell.src = "img/cell_on.png"; 
-    noCell.src = "img/cell_off.png"; 
+// context.strokeStyle = "#aaaaaa";
+// for(let i = 10.5; i < HEIGHT; i+= 10 ){
+//     context.moveTo(0, i);
+//     context.lineTo(WIDTH, i);
+//     context.stroke();
+// }
+// for(let i = 10.5; i < WIDTH; i+= 10 ){
+//     context.moveTo(i, 0);
+//     context.lineTo(i, HEIGHT);
+//     context.stroke();
+// }
 
-//init virgin array of state
-for (let i = 0; i < canvasHeight; i++){
-    stateArray[i] =[];
+// canv.onclick = function(event){
+
+//     let rect = canv.getBoundingClientRect();
+//     //alert(`top: ${rect.top}, left: ${rect.left}`);
+//     // alert(event.pageX);
+//     // alert(event.pageY);
+//     //alert(`click: ${event.pageX-rect.left} ${event.pageY-rect.top}`);
+
+
+//     let coordX = Math.floor ( ( event.clientX - rect.left ) / 10);
+//     let coordY = Math.floor ( ( event.clientY - rect.top ) / 10);
+//     drawCell(coordX, coordY);
+
+   
+// }
+
+
+function Cells(elem, n){
+    //this.elem = elem;
+    this.context  = elem.getContext('2d');
+    this.isWorking = false;
+    this.interval = null;
     
-    for (let j = 0; j < canvasWidth; j++){
-        stateArray[i][j] = [0, 0];
-        /*
-        **[0] - now  {0,1} 0 - no, 1 - yes
-        **[1] - touch 0 
-        */
+    this.stateArray = [];
+    this.images = {
+        bg: new Image(),
+        alive: new Image(),
+        death: new Image()
 
-    }
-}
+    };
+    this.images.bg.src = 'js/res/bg.png';
+    this.images.death.src = 'js/res/death.png';
+    this.images.alive.src = 'js/res/alive.png';
 
-function drawBG(){
-    for(let i = 0 ; i < canvasHeight  ;i++){
-        for(let j = 0 ; j < canvasWidth; j++){
-            gameCtx.drawImage(bgCell, i*30, j*30);
+    for(let i = 0; i < n ; i++){
+        this.stateArray[i] = []
+        for(let j = 0; j < n; j++){
+
+            this.stateArray[i][j] = {
+                state: 0,
+                next: 0
+            };
+
         }
     }
-}
 
-function drawCells(){
-    for(let i = 0 ; i < canvasHeight  ;i++){
-        for(let j = 0 ; j < canvasWidth; j++){
-            if(stateArray[i][j][0] == 0){
-                gameCtx.drawImage(noCell, j*30, i*30);
-            }
-            else{
-                gameCtx.drawImage(yesCell, j*30, i*30);
-            }
+    this.countNextState = function(){
+
+        let countCellState = (i, j) => {
+            let getState = (i, j) => {
+                if(i < 0) i = n - 1;
+                if(j < 0) j = n - 1;
+
+                if(i >= n) i = 0;
+                if(j >= n) j = 0;
+
+                return this.stateArray[i][j].state;
+            };
+
+            let aliveNeigh = 0;
+            [ [i,j+1],
+                [i+1,j],
+                [i+1,j+1],
+                [i-1,j], 
+                [i,j-1], 
+                [i-1,j-1], 
+                [i+1,j-1], 
+                [i-1,j+1] ].forEach(function(item){
+                    aliveNeigh += getState.apply(this, item);
+
+               });
             
+            let cellState = this.stateArray[i][j].state;
+            if(cellState){
+                if(aliveNeigh == 3 || aliveNeigh ==2) return 1;
+
+                return 0;
+
+            }
+
+            if (aliveNeigh == 3) return 1;
+            return 0;
+
+        };
+
+
+
+        for(let i = 0; i < n; i++){
+            for(let j = 0; j < n; j++){
+                this.stateArray[i][j].next = countCellState(i, j);
+            }
         }
-    }
-}
+    };
 
-function draw(){
-    drawBG();
-    drawCells();
-    //calcNextFrame();
+    this.setNextState = function(){
+        this.countNextState();
 
-
-
-}
-
-function calcNextFrame(){
+        for(let i = 0; i < n ; i++){
+            for(let j = 0; j < n; j++){
     
-
-
-    for(let i = 0; i < canvasHeight ; i++){
-        for(let j = 0; j < canvasWidth ; j++){
-            let sum = 0;
-
-            
-
-            if (!(i == 0 || j == 0  ||i == canvasHeight-1  || j == (canvasWidth - 1))){
-                sum = stateArray[i-1][j][0] + stateArray[i][j-1][0] +
-                stateArray[i-1][j-1][0] + stateArray[i-1][j+1][0] +
-                stateArray[i+1][j][0] + stateArray[i][j+1][0] +
-                stateArray[i+1][j+1][0] + stateArray[i+1][j-1][0];
+                this.stateArray[i][j].state = this.stateArray[i][j].next;
+    
             }
+        }
 
-            else{
+        this.drawScreen();
 
-                if (j == 0){
-                    sum +=  stateArray[i][j+1][0];//R
-                    sum +=  stateArray[i][canvasWidth-1][0];//L
+        
+    };
 
-
-                    if(i == 0 ){
-                        sum +=  stateArray[canvasHeight-1][j][0];//T
-                        sum +=  stateArray[i+1][j][0];//B
-                        sum +=  stateArray[canvasHeight-1][j+1][0];//TR
-                        sum +=  stateArray[canvasHeight-1][canvasWidth-1][0];//TL
-                        sum +=  stateArray[i+1][j+1][0];//BR
-                        sum +=  stateArray[i+1][canvasWidth-1][0];//BL
-                    }
-                    else if(i == canvasHeight-1){
-                        sum +=  stateArray[i-1][j][0];//T
-                        sum +=  stateArray[0][j][0];//B
-                        sum +=  stateArray[i-1][canvasWidth-1][0];
-                        sum +=  stateArray[0][canvasWidth-1][0];
-                        sum +=  stateArray[i-1][j+1][0];
-                        sum +=  stateArray[0][j+1][0];
-                    }
-                    else{
-                        sum +=  stateArray[i-1][j][0];//T
-                        sum +=  stateArray[i+1][j][0];//B
-                        sum +=  stateArray[i-1][canvasWidth-1][0];//NILL
-                        sum +=  stateArray[i+1][canvasWidth-1][0];//NILL
-                        sum +=  stateArray[i-1][j+1][0];//NILL
-                        sum +=  stateArray[i+1][j+1][0];//NILL
-                    }
-
-                }
-                else if(j == canvasWidth-1){
-                    sum +=  stateArray[i][j-1][0];//L
-                    sum +=  stateArray[i][0][0];//R
+    this.drawScreen = function(){
+        
+        let drawBG = () =>{
+            
+            for(let i = 0; i < n ; i++){
+                for(let j = 0; j < n; j++){
                     
-                    if(i == 0 ){
-                        sum +=  stateArray[canvasHeight-1][j][0];//T
-                        sum +=  stateArray[i+1][j][0];//B
-                        sum +=  stateArray[canvasHeight-1][j-1][0];//NILL
-                        sum +=  stateArray[i+1][j-1][0];//NILL
-                        sum +=  stateArray[canvasHeight-1][0][0];//NILL
-                        sum +=  stateArray[i+1][0][0];//NILL
-                    }
-                    else if(i == canvasHeight-1){
-                        sum +=  stateArray[i-1][j][0];//T
-                        sum +=  stateArray[0][j][0];//B
-                        sum +=  stateArray[i-1][j-1][0];//NILL
-                        sum +=  stateArray[0][j-1][0];//NILL
-                        sum +=  stateArray[i-1][0][0];//NILL
-                        sum +=  stateArray[0][0][0];//NILL
-                    }
-                    else{
-                        sum +=  stateArray[i-1][j][0];//t
-                        sum +=  stateArray[i+1][j][0];//b
-                        sum +=  stateArray[i-1][j-1][0];//NILL
-                        sum +=  stateArray[i+1][j-1][0];//NILL
-                        sum +=  stateArray[i-1][0][0];//NILL
-                        sum +=  stateArray[i+1][0][0];//NILL
-                    }
-
-
-                }
-                else{
-                    sum +=  stateArray[i][j-1][0];//L
-                    sum +=  stateArray[i][j+1][0];//R
-
-                    if(i == 0 ){
-                        sum +=  stateArray[canvasHeight-1][j][0];//t
-                        sum +=  stateArray[i+1][j][0];//b
-                        sum +=  stateArray[canvasHeight-1][j-1][0];//NILL
-                        sum +=  stateArray[i+1][j-1][0];//NILL
-                        sum +=  stateArray[canvasHeight-1][j+1][0];//NILL
-                        sum +=  stateArray[i+1][j+1][0];//NILL
-                    }
-                    else {
-                        sum +=  stateArray[i-1][j][0];//t
-                        sum +=  stateArray[0][j][0];//b
-                        sum +=  stateArray[i-1][j-1][0];//NILL
-                        sum +=  stateArray[0][j-1][0];//NILL
-                        sum +=  stateArray[i-1][j+1][0];//NILL  
-                        sum +=  stateArray[0][j+1][0];//NILL
-                    }
+                    this.context.drawImage(this.images.bg, i * 20, j * 20);
                     
 
                 }
             }
 
-
-            /*
-            if (!(i == 0 || j == 0  ||i == canvasHeight-1  || j == (canvasWidth - 1))){
-                sum = stateArray[i-1][j][0] + stateArray[i][j-1][0] +
-                stateArray[i-1][j-1][0] + stateArray[i-1][j+1][0] +
-                stateArray[i+1][j][0] + stateArray[i][j+1][0] +
-                stateArray[i+1][j+1][0] + stateArray[i+1][j-1][0];
-            }
-            else{
-
-                if (i == 0){
-                    sum +=  stateArray[i+1][j][0];//B
-                    sum +=  stateArray[canvasWidth-1][j][0];//T
-
-                    if (j == 0){
-                        sum +=  stateArray[i][canvasHeight-1][0];//L
-                        sum +=  stateArray[i][j+1][0];//R
-                        sum +=  stateArray[i+1][canvasHeight-1][0];//BL
-                        sum +=  stateArray[i+1][j+1][0];//BR
-                        sum +=  stateArray[canvasWidth-1][canvasHeight-1][0];//TL
-                        sum +=  stateArray[canvasWidth-1][j+1][0];//TR
-                    }
-                    else if (j == canvasWidth-1){
-                        sum +=  stateArray[i][canvasHeight-1][0];//L
-                        sum +=  stateArray[i][j+1][0];//R
-                        sum +=  stateArray[i+1][canvasHeight-1][0];//BL
-                        sum +=  stateArray[i+1][j+1][0];//BR*
-                        sum +=  stateArray[canvasWidth-1][canvasHeight-1][0];//TL
-                        sum +=  stateArray[canvasWidth-1][j+1][0];//TR*
-                    }
-                    else{
-
-                    }
-                }
-                else if (i == canvasHeight-1){
-                    sum +=  stateArray[0][j][0];
-                    sum +=  stateArray[i-1][j][0];//canvasHeight
-
-
-                }
-                
-                else{
-                    sum +=  stateArray[i+1][j][0];
-                    sum +=  stateArray[i-1][j][0]; 
-
-
-                }
-
-
-
-            }
-            */
-
-
-
-
-
-            
-            stateArray[i][j][1] = sum;
-
-            
         }
-    }
-}
-
-function setNextFrame(){
-    for(let i = 0; i < canvasHeight ; i++){
-        for(let j = 0; j < canvasWidth ; j++){
-            if (stateArray[i][j][0] == 1){
-                if(stateArray[i][j][1] == 2 || stateArray[i][j][1] == 3/* ||stateArray[i][j][1] ==*/ )
-                {
-                    stateArray[i][j][0] = 1;
+        let drawCells = ()=>{
+            for(let i = 0; i < n ; i++){
+                for(let j = 0; j < n; j++){
+                    let img = (this.stateArray[i][j].state ) ?
+                    this.images.alive :
+                    this.images.death ;
+                    
+                    this.context.drawImage(img, j * 20, i * 20 );
                 }
-                else
-                {
-                    stateArray[i][j][0] = 0;
-                }
-            
             }
-            else{
-                if(stateArray[i][j][1] == 3 || stateArray[i][j][1] == 2 || stateArray[i][j][1] == 7 || stateArray[i][j][1] == 4 )
-                {
-                    stateArray[i][j][0] = 1;
-                }
-                else
-                {
-                    stateArray[i][j][0] = 0;
-                }   
-
-            }
-
         }
-    }
-}
 
-bgCell.onload = draw;
+        this.loadCounter = 0;
+        drawBG();
+        drawCells();
 
+        this.images.bg.onload =
+         this.images.alive.onload =
+          this.images.death.onload = () =>{
+              this.loadCounter++;
+              if(this.loadCounter ==3){
+                drawBG();
+                drawCells();
+                  
+              }
 
-
-gameCanv.onclick = function(elem){
-    let Vcanvas = gameCanv.getBoundingClientRect().top;
-    let Hcanvas = gameCanv.getBoundingClientRect().left;
-
-    var clickX = parseInt((elem.clientX - Hcanvas)/30);
-    var clickY = parseInt((elem.clientY - Vcanvas)/30);
-
-    if(stateArray[clickY][clickX][0]==0)
-        stateArray[clickY][clickX][0] = 1;
-    else
-        stateArray[clickY][clickX][0] = 0;
-
-
-    //alert(clickX + "  " + clickY);
-    draw();
-};
-
-
-
-
-document.addEventListener('keydown', function () {
-    var down;
-    var state = false;
-
-    //var interval;
-
-
-    return function () {
-        
-
-        //alert(logArray());
+          }
 
         
-    // your magic code here
-        if (!state){
-            state = true;
-            interval = setInterval(function(){
-                
-                calcNextFrame();
-                setNextFrame();
-                
-                draw();
-                //alert(logArray());
+        
 
-            }, 200);
+    };
+    elem.onclick = (event) =>{
+        let rect = elem.getBoundingClientRect()
+
+        let canvasTop = rect.top;
+        let canvasLeft = rect.left;
+
+        let jCord = Math.floor((event.clientX - canvasLeft) / 20);
+        let iCord = Math.floor((event.clientY - canvasTop)/20);
+        let tmp = this.stateArray[iCord][jCord];
+
+        if(tmp.state == 1) tmp.state = 0;
+        else tmp.state = 1;
+        //this.setNextState();
+        this.drawScreen();
+        //alert(this.stateArray[0][0].state);
+    }
+
+    
+
+    this.handler = ()=>{
+        if(!this.isWorking){
+            this.isWorking = true ;
+            this.interval = setInterval( ()=>{
+                this.setNextState();
+                this.drawScreen();
+            }, 50);
         }
         else{
-            clearInterval(interval);
-            state = 0;
+            
+            clearInterval(this.interval);
+            this.isWorking = false ;
         }
-        //alert();
-    }
-
-
-
-}(), false);
-
-
-
-
-
-
-var logArray = function(){
-    let string = "";
-    for (let i = 0; i < canvasHeight;i++){
-        let tmp = "";
-        for (let j = 0; j < canvasWidth;j++){
-            tmp += "[" + stateArray[i][j][1] + "]";
-
-
-        }
-        string += tmp + "\n";
-    }
-    return string;
+    };
+    document.addEventListener('keydown', this.handler);
+    document.addEventListener('Swiperight', this.handler);
 
 
 }
 
+let canv = document.getElementsByClassName('canvas_block')[0];
 
-var logArray2 = function(){
-    let string = "";
-    for (let i = 0; i < canvasHeight;i++){
-        let tmp = "";
-        for (let j = 0; j < canvasWidth;j++){
-            tmp += "[" + stateArray[i][j][0] + "]";
+let field = new Cells(canv, 40);
 
-
-        }
-        string += tmp + "\n";
-    }
-    return string;
-
-
-}
-
-
-
-
-
-
+field.drawScreen();
 
 
