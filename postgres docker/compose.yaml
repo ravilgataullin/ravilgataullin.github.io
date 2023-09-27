@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  pgres:
+    image: postgres:15.3-alpine3.18
+    restart: always
+    container_name: pgres_db
+    volumes: 
+      - ./dbdata:/var/lib/postgresql/data/pgdata
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=mysecretpassword 
+      - POSTGRES_DB=pgbase
+    ports:
+      - "5432:5432"
+  adminer: 
+    image: adminer:latest
+    restart: always
+    container_name: adminer_pg
+    ports:
+      - "8080:8080"
+
